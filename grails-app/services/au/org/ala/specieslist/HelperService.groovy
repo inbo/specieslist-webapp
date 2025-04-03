@@ -100,7 +100,7 @@ class HelperService {
         if(grailsApplication.config.getProperty('collectory.enableSync', Boolean, false)){
             def postUrl = grailsApplication.config.collectory.baseURL + "/ws/dataResource"
             def http = new HTTPBuilder(postUrl)
-            http.setHeaders([Authorization: "Bearer ${webService.getTokenService().getAuthToken(false)}"])
+//            http.setHeaders([Authorization: "Bearer ${webService.getTokenService().getAuthToken(false)}"])
             http.getClient().getParams().setParameter("http.socket.timeout", new Integer(5000))
             Map jsonBody = createJsonForNewDataResource(map)
             log.debug(jsonBody?.toString())
