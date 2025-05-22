@@ -112,7 +112,7 @@ class SpeciesListItemController {
                 } else {
                     if (requestParams.message)
                         flash.message = requestParams.message
-                    def defaultMaxItemsPerPage = Integer.parseInt(grailsApplication.config.maxItemsPerPage)?:25
+                    def defaultMaxItemsPerPage = Integer.parseInt(((grailsApplication.config.maxItemsPerPage)?:25).toString())
                     requestParams.max = Math.min(requestParams.max ? requestParams.int('max') : defaultMaxItemsPerPage, 1000)
                     requestParams.sort = requestParams.sort ?: "itemOrder"
                     requestParams.offset = requestParams.int('offset') ?: 0
