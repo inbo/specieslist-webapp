@@ -516,7 +516,7 @@ class HelperService {
         List sli = sl.getItems()?.toList()
         matchCommonNamesForSpeciesListItems(sli)
         log.info("Saving ${totalCount} records....")
-        sl.save()
+        sl.save(flush: true)
         log.info("${totalCount} records saved")
         [totalRecords: totalCount, successfulItems: itemCount]
     }
