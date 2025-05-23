@@ -223,12 +223,13 @@
                     if(response.url != null && response.error == null) {
                         window.location.href = response.url;
                     } else {
+                        console.log('upload debug: ajax call successful, but response is not as expected: url: ' + response.url + ', error: ' + response.error);
                         reportError(response.error)
                     }
 
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    //console.log('Error!  Status = ' ,xhr.status, textStatus, errorThrown, xhr.responseText);
+                    console.log('upload debug: Error!  Status = ' ,xhr.status, textStatus, errorThrown, xhr.responseText);
                     reportError("Error: " +errorThrown);
                 }
 
