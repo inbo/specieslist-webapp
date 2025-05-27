@@ -21,6 +21,8 @@ import org.hibernate.criterion.CriteriaQuery
 import org.hibernate.criterion.Order
 import org.hibernate.FetchMode
 
+import javax.persistence.criteria.JoinType
+
 class QueryService {
 
     public static final String EDITOR_SQL_RESTRICTION = "this_.id in (select species_list_id from species_list_editors e where e.editors_string = ?)"
@@ -745,7 +747,7 @@ class QueryService {
         if (requestParams.fq) {
             speciesListItems = SpeciesListItem.executeQuery("select sli " + baseQueryAndParams[0], baseQueryAndParams[1], requestParams)
         } else {
-            def criteria = SpeciesListItem.createCriteria()
+            def criteria = SpeciesListItem.createCriteria().join("kvpValues", JoinType.LEFT)
 
             def q = requestParams.q
             speciesListItems = criteria.list(requestParams) {
