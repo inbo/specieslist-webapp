@@ -752,6 +752,10 @@ class QueryService {
             def q = requestParams.q
             speciesListItems = criteria.list(requestParams) {
                 join "kvpValues", JoinType.LEFT
+                join "matchedSpecies", JoinType.LEFT
+                setFetchMode "kvpValues", FetchMode.JOIN
+                setFetchMode "matchedSpecies", FetchMode.JOIN
+                distinct()
                 and {
                     eq(DATA_RESOURCE_UID, requestParams.id)
                     if (q) {
