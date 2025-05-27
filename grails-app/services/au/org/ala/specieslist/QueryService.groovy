@@ -747,10 +747,11 @@ class QueryService {
         if (requestParams.fq) {
             speciesListItems = SpeciesListItem.executeQuery("select sli " + baseQueryAndParams[0], baseQueryAndParams[1], requestParams)
         } else {
-            def criteria = SpeciesListItem.createCriteria().join("kvpValues", JoinType.LEFT)
+            def criteria = SpeciesListItem.createCriteria()
 
             def q = requestParams.q
             speciesListItems = criteria.list(requestParams) {
+                join "kvpValues", JoinType.LEFT
                 and {
                     eq(DATA_RESOURCE_UID, requestParams.id)
                     if (q) {
