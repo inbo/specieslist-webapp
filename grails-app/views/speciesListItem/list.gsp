@@ -448,30 +448,30 @@
                             </div>
                         </div>
                     </g:if>
-                    <g:if test="${userCanEditData}">
-                        <div class="modal fade" id="addRecord" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+%{--                    <g:if test="${userCanEditData}">--}%
+%{--                        <div class="modal fade" id="addRecord" role="dialog">--}%
+%{--                            <div class="modal-dialog" role="document">--}%
+%{--                                <div class="modal-content">--}%
+%{--                                    <div class="modal-header">--}%
+%{--                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}%
 
-                                        <h3>${message(code: 'public.lists.items.add', default: 'Add record values')}</h3>
-                                    </div>
+%{--                                        <h3>${message(code: 'public.lists.items.add', default: 'Add record values')}</h3>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-body">
-                                        <g:include controller="editor" action="addRecordScreen"
-                                                   params="${[id: params.id, action: 'addRecordScreen']}"></g:include>
-                                    </div>
+%{--                                    <div class="modal-body">--}%
+%{--                                        <g:include controller="editor" action="addRecordScreen"--}%
+%{--                                                   params="${[id: params.id, action: 'addRecordScreen']}"></g:include>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">${message(code:'data-dismiss-close', default: 'Close')}</button>
-                                        <button class="btn btn-primary" id="saveNewRecord" data-id="${speciesList.id}"
-                                                data-modal="#addRecord">${message(code:'data-save', default: 'Save changes')}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </g:if>
+%{--                                    <div class="modal-footer">--}%
+%{--                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">${message(code:'data-dismiss-close', default: 'Close')}</button>--}%
+%{--                                        <button class="btn btn-primary" id="saveNewRecord" data-id="${speciesList.id}"--}%
+%{--                                                data-modal="#addRecord">${message(code:'data-save', default: 'Save changes')}</button>--}%
+%{--                                    </div>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                    </g:if>--}%
                 </div>
             </div>
             <div class="col-md-6" id="buttonDiv">
