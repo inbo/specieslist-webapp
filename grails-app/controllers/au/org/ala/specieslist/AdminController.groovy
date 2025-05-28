@@ -37,7 +37,7 @@ class AdminController {
                      websiteUrl: grailsApplication.config.serverName + request.contextPath + '/speciesListItem/list/' + list.dataResourceUid,
                      techDescription: "This list was first uploaded by " + list.firstName
                              + " " +list.surname + " on the " + list.lastUpdated
-                             + "." + "It contains " + list.itemsCount + " taxa.",
+                             + "." + "It contains " + SpeciesListItem.countByList(list) + " taxa.",
                      resourceType : "species-list",
                      status : "dataAvailable",
                      contentTypes : '["species list"]'
