@@ -747,27 +747,39 @@ class QueryService {
         if (requestParams.fq) {
             speciesListItems = SpeciesListItem.executeQuery("select sli " + baseQueryAndParams[0], baseQueryAndParams[1], requestParams)
         } else {
-            def criteria = SpeciesListItem.createCriteria()
-
             def q = requestParams.q
-            speciesListItems = criteria.list(requestParams) {
-                join "kvpValues", JoinType.LEFT
-                join "matchedSpecies", JoinType.LEFT
-                setFetchMode "kvpValues", FetchMode.JOIN
-                setFetchMode "matchedSpecies", FetchMode.JOIN
-                distinct()
-                and {
-                    eq(DATA_RESOURCE_UID, requestParams.id)
-                    if (q) {
-                        def queryParam = "%" + q + "%"
-                        or {
-                            ilike(COMMON_NAME, queryParam)
-                            ilike(MATCHED_NAME, queryParam)
-                            ilike(RAW_SCIENTIFIC_NAME, queryParam)
-                        }
-                    }
-                }
+            // 1. Paginate IDs only (fast)
+            def ids = SpeciesListItem.executeQuery('''
+                select s.id
+                from SpeciesListItem s
+                where s.dataResourceUid = :id
+            ''', [id: requestParams.id], [max: requestParams.max, offset: requestParams.offset])
+
+            if (!ids) return []
+
+            // 2. Fetch full objects + associations in second query
+
+            def params = [ids: ids]
+
+            def hql = '''
+                select distinct s
+                from SpeciesListItem s
+                left join fetch s.kvpValues
+                left join fetch s.matchedSpecies
+                where s.id in (:ids)
+            '''
+
+            if (q) {
+                hql += '''
+                and (
+                    lower(s.commonName) like :queryParam or
+                    lower(s.matchedName) like :queryParam or
+                    lower(s.rawScientificName) like :queryParam
+                    )
+                    '''
+                params.queryParam = "%${q.toLowerCase()}%"
             }
+            speciesListItems = SpeciesListItem.executeQuery(hql, [ids: ids])
         }
         speciesListItems
     }
