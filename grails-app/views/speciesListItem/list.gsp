@@ -393,10 +393,10 @@
                                 <a href="#" class="btn btn-default btn-sm" data-target="#modal" data-toggle="modal"><i
                                         class="glyphicon glyphicon-user "></i>  ${message(code:'public.lists.view.page.button07', default: 'Edit permissions')}</a>
                             </g:if>
-                            <g:if test="${userCanEditData}">
-                                <a href="#" class="btn btn-default btn-sm" data-target="#addRecord" data-toggle="modal"><i
-                                        class="glyphicon glyphicon-plus-sign "></i> ${message(code:'public.lists.view.page.button08', default: 'Add species')}</a>
-                            </g:if>
+%{--                            <g:if test="${userCanEditData}">--}%
+%{--                                <a href="#" class="btn btn-default btn-sm" data-target="#addRecord" data-toggle="modal"><i--}%
+%{--                                        class="glyphicon glyphicon-plus-sign "></i> ${message(code:'public.lists.view.page.button08', default: 'Add species')}</a>--}%
+%{--                            </g:if>--}%
                         </div>
                     </h2>
                     <g:if test="${userCanEditPermissions}">
@@ -894,14 +894,14 @@
         </div> <!-- col narrow -->
         <div class="col-md-10">
         <div class="row">
-            <div class="col-md-6">
-                <div id="listItemView" class="btn-group">
-                    <a class="btn btn-default btn-sm list disabled" title="${message(code:'public.lists.view.page.tooltip02', default:'View as detailed list')} " id="toggleList" href="#"><i
-                            class="glyphicon glyphicon-th-list"></i> ${message(code:'public.lists.view.page.button02', default:'list')}</a>
-                    <a class="btn btn-default btn-sm grid" title="${message(code:'public.lists.view.page.tooltip03', default:'View as thumbnail image grid')}" id="toggleGrid" href="#"><i
-                            class="glyphicon glyphicon-th"></i> ${message(code:'public.lists.view.page.button03', default:'grid')}</a>
-                </div>
-            </div>
+%{--            <div class="col-md-6">--}%
+%{--                <div id="listItemView" class="btn-group">--}%
+%{--                    <a class="btn btn-default btn-sm list disabled" title="${message(code:'public.lists.view.page.tooltip02', default:'View as detailed list')} " id="toggleList" href="#"><i--}%
+%{--                            class="glyphicon glyphicon-th-list"></i> ${message(code:'public.lists.view.page.button02', default:'list')}</a>--}%
+%{--                    <a class="btn btn-default btn-sm grid" title="${message(code:'public.lists.view.page.tooltip03', default:'View as thumbnail image grid')}" id="toggleGrid" href="#"><i--}%
+%{--                            class="glyphicon glyphicon-th"></i> ${message(code:'public.lists.view.page.button03', default:'grid')}</a>--}%
+%{--                </div>--}%
+%{--            </div>--}%
             <div class="col-md-6">
                 <form class="listSearchForm">
                 <div id="searchView" class="searchItemForm">
@@ -921,53 +921,53 @@
             </div>
         </div>
 
-            <div id="gridView" class="not-visible">
-                <g:each var="result" in="${results}" status="i">
-                    <g:set var="recId" value="${result.id}"/>
+%{--            <div id="gridView" class="not-visible">--}%
+%{--                <g:each var="result" in="${results}" status="i">--}%
+%{--                    <g:set var="recId" value="${result.id}"/>--}%
 %{--                    <g:set var="bieTitle">${message(code:'public.lists.view.table.tooltip03', default:'species page for ')}<i>${result.rawScientificName}</i></g:set>--}%
-                    <div class="imgCon">
-                        <a class="thumbImage viewRecordButton" rel="thumbs" title="${message(code:'public.lists.view.table.tooltip02', default:'click to view details')}" href="#viewRecord"
-                                    data-id="${recId}"><img
-                        src="${raw(result.imageUrl ?: asset.assetPath(src: 'infobox_info_icon.png\" style=\"opacity:0.5'))}"
-                        alt="thumbnail species image"/>
-                    </a>
-                    <g:if test="${true}">
-                        <g:set var="displayName">
-                            <i><g:if test="${result.guid == null}">
-                                ${fieldValue(bean: result, field: "rawScientificName")}
-                            </g:if>
-                                <g:else>
-                                    ${result.matchedName}
-                                </g:else></i>
-                        </g:set>
-                        <div class="meta brief">
-                            ${raw(displayName)}
-                        </div>
+%{--                    <div class="imgCon">--}%
+%{--                        <a class="thumbImage viewRecordButton" rel="thumbs" title="${message(code:'public.lists.view.table.tooltip02', default:'click to view details')}" href="#viewRecord"--}%
+%{--                                    data-id="${recId}"><img--}%
+%{--                        src="${raw(result.imageUrl ?: asset.assetPath(src: 'infobox_info_icon.png\" style=\"opacity:0.5'))}"--}%
+%{--                        alt="thumbnail species image"/>--}%
+%{--                    </a>--}%
+%{--                    <g:if test="${true}">--}%
+%{--                        <g:set var="displayName">--}%
+%{--                            <i><g:if test="${result.guid == null}">--}%
+%{--                                ${fieldValue(bean: result, field: "rawScientificName")}--}%
+%{--                            </g:if>--}%
+%{--                                <g:else>--}%
+%{--                                    ${result.matchedName}--}%
+%{--                                </g:else></i>--}%
+%{--                        </g:set>--}%
+%{--                        <div class="meta brief">--}%
+%{--                            ${raw(displayName)}--}%
+%{--                        </div>--}%
 
-                        <div class="meta detail hide">
-                            ${raw(displayName)}
-                            <g:if test="${result.author}">${result.author}</g:if>
-                            <g:if test="${result.commonName}"><br>${result.commonName}</g:if>
-                            <div class="pull-right" style="display:inline-block; padding: 5px;">
-                                <a href="#viewRecord" class="viewRecordButton" title="${message(code:'public.lists.view.table.tooltip01', default:'view record')}" data-id="${recId}"><i
-                                        class="glyphicon glyphicon-info-sign glyphicon-white"></i></a>&nbsp;
-                                <g:if test="${userCanEditData}">
-                                    <a href="#" title="${message(code:'public.lists.view.table.tooltip04', default:'edit')}"
-                                       data-remote="${createLink(controller: 'editor', action: 'editRecordScreen', id: result.id)}"
-                                       data-target="#editRecord_${recId}" data-toggle="modal"><i
-                                            class="glyphicon glyphicon-pencil glyphicon-white"></i></a>&nbsp;
-                                    <a href="#" title="${message(code:'public.lists.view.table.tooltip05', default:'delete')}" data-target="#deleteRecord_${recId}"
-                                       data-toggle="modal"><i class="glyphicon glyphicon-trash glyphicon-white"></i>
-                                    </a>&nbsp;
-                                </g:if>
-                            </div>
-                        </div>
-                    </g:if>
-                    </a>
-                </div>
+%{--                        <div class="meta detail hide">--}%
+%{--                            ${raw(displayName)}--}%
+%{--                            <g:if test="${result.author}">${result.author}</g:if>--}%
+%{--                            <g:if test="${result.commonName}"><br>${result.commonName}</g:if>--}%
+%{--                            <div class="pull-right" style="display:inline-block; padding: 5px;">--}%
+%{--                                <a href="#viewRecord" class="viewRecordButton" title="${message(code:'public.lists.view.table.tooltip01', default:'view record')}" data-id="${recId}"><i--}%
+%{--                                        class="glyphicon glyphicon-info-sign glyphicon-white"></i></a>&nbsp;--}%
+%{--                                <g:if test="${userCanEditData}">--}%
+%{--                                    <a href="#" title="${message(code:'public.lists.view.table.tooltip04', default:'edit')}"--}%
+%{--                                       data-remote="${createLink(controller: 'editor', action: 'editRecordScreen', id: result.id)}"--}%
+%{--                                       data-target="#editRecord_${recId}" data-toggle="modal"><i--}%
+%{--                                            class="glyphicon glyphicon-pencil glyphicon-white"></i></a>&nbsp;--}%
+%{--                                    <a href="#" title="${message(code:'public.lists.view.table.tooltip05', default:'delete')}" data-target="#deleteRecord_${recId}"--}%
+%{--                                       data-toggle="modal"><i class="glyphicon glyphicon-trash glyphicon-white"></i>--}%
+%{--                                    </a>&nbsp;--}%
+%{--                                </g:if>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                    </g:if>--}%
+%{--                    </a>--}%
+%{--                </div>--}%
 
-                </g:each>
-            </div><!-- /#iconView -->
+%{--                </g:each>--}%
+%{--            </div><!-- /#iconView -->--}%
             <div id="listView" class="not-visible">
                 <section class="double">
                     <div class="fwtable table-bordered" style="overflow:auto;width:100%;">
