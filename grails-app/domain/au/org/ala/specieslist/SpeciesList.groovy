@@ -89,7 +89,7 @@ class SpeciesList {
         isSDS index: 'idx_listsds'
         wkt type: 'text'
         description type:  'text'
-//        itemsCount formula: "(select count(*) from species_list_item sli where sli.list_id = id)"
+        itemsCount formula: "(select count(*) from species_list_item sli where sli.list_id = id)"
 //        ownerFullName formula: "concat(first_name, ' ', surname)" // derived to allow easier sorting by owner name
     }
 

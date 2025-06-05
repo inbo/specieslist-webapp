@@ -295,7 +295,7 @@ class WebServiceController {
                 lastMatched    : sl.lastMatched,
                 username       : sl.username,
                 fullName       : sl.getFullName(),
-                itemCount      : SpeciesListItem.countByList(sl),
+                itemCount      : sl.itemsCount,//SpeciesListItem.countByList(sl)
                 isAuthoritative: (sl.isAuthoritative ?: false),
                 isInvasive     : (sl.isInvasive ?: false),
                 isThreatened   : (sl.isThreatened ?: false),
