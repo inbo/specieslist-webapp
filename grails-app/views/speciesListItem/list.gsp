@@ -376,78 +376,78 @@
 <body class="yui-skin-sam nav-species">
 
 <div id="content" class="container-fluid">
-    <header id="page-header">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <h2 class="subject-subtitle">
-                        ${message(code:'view.lists.header', default:'Species List')}: <a href="${collectoryUrl}/public/show/${params.id}"
-                                         title="${message(code:'view.lists.dataresource.tooltip', default:'view Date Resource page')}">${speciesList?.listName}</a>
-                        &nbsp;&nbsp;
-                        <div class="btn-group btn-group" id="listActionButtons">
-                            <a href="#" id="toggleListInfo" class="btn btn-default btn-sm"><i
-                                    class="glyphicon glyphicon-info-sign "></i> ${message(code:'public.lists.view.page.button01', default: 'List info')} </a>
-                            <g:if test="${userCanEditPermissions}">
-                                <a href="#" class="btn btn-default btn-sm" data-target="#deleteList" data-toggle="modal"><i
-                                        class="glyphicon glyphicon-remove "></i> Delete list</a>
-                                <a href="#" class="btn btn-default btn-sm" data-target="#modal" data-toggle="modal"><i
-                                        class="glyphicon glyphicon-user "></i>  ${message(code:'public.lists.view.page.button07', default: 'Edit permissions')}</a>
-                            </g:if>
+%{--    <header id="page-header">--}%
+%{--        <div class="row">--}%
+%{--            <div class="col-md-6">--}%
+%{--                <div class="row">--}%
+%{--                    <h2 class="subject-subtitle">--}%
+%{--                        ${message(code:'view.lists.header', default:'Species List')}: <a href="${collectoryUrl}/public/show/${params.id}"--}%
+%{--                                         title="${message(code:'view.lists.dataresource.tooltip', default:'view Date Resource page')}">${speciesList?.listName}</a>--}%
+%{--                        &nbsp;&nbsp;--}%
+%{--                        <div class="btn-group btn-group" id="listActionButtons">--}%
+%{--                            <a href="#" id="toggleListInfo" class="btn btn-default btn-sm"><i--}%
+%{--                                    class="glyphicon glyphicon-info-sign "></i> ${message(code:'public.lists.view.page.button01', default: 'List info')} </a>--}%
+%{--                            <g:if test="${userCanEditPermissions}">--}%
+%{--                                <a href="#" class="btn btn-default btn-sm" data-target="#deleteList" data-toggle="modal"><i--}%
+%{--                                        class="glyphicon glyphicon-remove "></i> Delete list</a>--}%
+%{--                                <a href="#" class="btn btn-default btn-sm" data-target="#modal" data-toggle="modal"><i--}%
+%{--                                        class="glyphicon glyphicon-user "></i>  ${message(code:'public.lists.view.page.button07', default: 'Edit permissions')}</a>--}%
+%{--                            </g:if>--}%
 %{--                            <g:if test="${userCanEditData}">--}%
 %{--                                <a href="#" class="btn btn-default btn-sm" data-target="#addRecord" data-toggle="modal"><i--}%
 %{--                                        class="glyphicon glyphicon-plus-sign "></i> ${message(code:'public.lists.view.page.button08', default: 'Add species')}</a>--}%
 %{--                            </g:if>--}%
-                        </div>
-                    </h2>
-                    <g:if test="${userCanEditPermissions}">
-                        <div class="modal fade" id="deleteList" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+%{--                        </div>--}%
+%{--                    </h2>--}%
+%{--                    <g:if test="${userCanEditPermissions}">--}%
+%{--                        <div class="modal fade" id="deleteList" tabindex="-1" role="dialog">--}%
+%{--                            <div class="modal-dialog" role="document">--}%
+%{--                                <div class="modal-content">--}%
+%{--                                    <div class="modal-header">--}%
+%{--                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}%
 
-                                        <h3>Are you sure you want to delete this species list?</h3>
-                                    </div>
+%{--                                        <h3>Are you sure you want to delete this species list?</h3>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-body">
-                                        <g:if test="${grailsApplication.config.collectory.enableSync?.toString()?.toBoolean()}">
-                                            <p>This will delete <i>${speciesList.listName}</i> species list and remove it from Collectory.</p>
-                                        </g:if>
-                                        <g:else>
-                                             <p>This will delete <i>${speciesList.listName}</i> species list.</p>
-                                        </g:else>
-                                    </div>
+%{--                                    <div class="modal-body">--}%
+%{--                                        <g:if test="${grailsApplication.config.collectory.enableSync?.toString()?.toBoolean()}">--}%
+%{--                                            <p>This will delete <i>${speciesList.listName}</i> species list and remove it from Collectory.</p>--}%
+%{--                                        </g:if>--}%
+%{--                                        <g:else>--}%
+%{--                                             <p>This will delete <i>${speciesList.listName}</i> species list.</p>--}%
+%{--                                        </g:else>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                                        <button class="btn btn-primary" data-id="${speciesList.id}" id="deleteSpeciesList">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+%{--                                    <div class="modal-footer">--}%
+%{--                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>--}%
+%{--                                        <button class="btn btn-primary" data-id="${speciesList.id}" id="deleteSpeciesList">Delete</button>--}%
+%{--                                    </div>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="modal fade" id="modal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+%{--                        <div class="modal fade" id="modal" tabindex="-1" role="dialog">--}%
+%{--                            <div class="modal-dialog" role="document">--}%
+%{--                                <div class="modal-content">--}%
+%{--                                    <div class="modal-header">--}%
+%{--                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}%
 
-                                        <h3 id="myModalLabel">${message(code:'public.lists.view.page.button09', default: 'Species list permissions')}</h3>
-                                    </div>
+%{--                                        <h3 id="myModalLabel">${message(code:'public.lists.view.page.button09', default: 'Species list permissions')}</h3>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-body">
-                                        <g:include controller="editor" action="editPermissions"
-                                                   params="${[id: params.id]}"></g:include>
-                                    </div>
+%{--                                    <div class="modal-body">--}%
+%{--                                        <g:include controller="editor" action="editPermissions"--}%
+%{--                                                   params="${[id: params.id]}"></g:include>--}%
+%{--                                    </div>--}%
 
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">${message(code:'data-dismiss-close', default: 'Close')}</button>
-                                        <button class="btn btn-primary" id="saveEditors">${message(code:'data-save', default: 'Save changes')}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </g:if>
+%{--                                    <div class="modal-footer">--}%
+%{--                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">${message(code:'data-dismiss-close', default: 'Close')}</button>--}%
+%{--                                        <button class="btn btn-primary" id="saveEditors">${message(code:'data-save', default: 'Save changes')}</button>--}%
+%{--                                    </div>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                    </g:if>--}%
 %{--                    <g:if test="${userCanEditData}">--}%
 %{--                        <div class="modal fade" id="addRecord" role="dialog">--}%
 %{--                            <div class="modal-dialog" role="document">--}%
@@ -472,8 +472,8 @@
 %{--                            </div>--}%
 %{--                        </div>--}%
 %{--                    </g:if>--}%
-                </div>
-            </div>
+%{--                </div>--}%
+%{--            </div>--}%
             <div class="col-md-6" id="buttonDiv">
                 <div class="row">
                     <div class="col-md-12">
@@ -498,106 +498,106 @@
             <div style="display:none">
                 <g:render template="/download"/>
             </div>
-        </div><!--inner-->
-    </header>
+%{--        </div><!--inner-->--}%
+%{--    </header>--}%
 
-    <div class="alert alert-info not-visible" id="list-meta-data">
-        <button type="button" class="close" onclick="$(this).parent().slideUp()">&times;</button>
-        <g:if test="${userCanEditPermissions}">
-            <a href="#" class="btn btn-default btn-sm" id="edit-meta-button"><i
-                    class="glyphicon glyphicon-pencil"></i> ${message(code:'view.lists.listinfo.edit.button.label', default:'Edit')}</a>
-        </g:if>
-        <dl class="dl-horizontal" id="show-meta-dl">
-            <dt>${message(code: 'speciesList.listName.label', default: 'List name')}</dt>
-            <dd>${speciesList.listName ?: '&nbsp;'}</dd>
-            <g:if test="${userCanEditPermissions || ownerVisibleToEditor}">
-                <dt>${message(code: 'speciesList.username.label', default: 'Owner')}</dt>
-                    <dd>${speciesList.fullName ?: speciesList.username}</dd>
-            </g:if>
-            <dt>${message(code: 'speciesList.listType.label', default: 'List type')}</dt>
-            <dd>${speciesList.listType?(message(code:speciesList.listType.i18nValue, default:speciesList.listType.displayValue)):''}</dd>
-            <!--dd>${speciesList.listType?.displayValue}</dd-->
-            <g:if test="${speciesList.description}">
-                <dt>${message(code: 'speciesList.description.label', default: 'Description')}</dt>
-                <dd>${speciesList.description}</dd>
-            </g:if>
-            <g:if test="${speciesList.url}">
-                <dt>${message(code: 'speciesList.url.label', default: 'URL')}</dt>
-                <dd><a href="${speciesList.url}" target="_blank">${speciesList.url}</a></dd>
-            </g:if>
-            <g:if test="${speciesList.wkt}">
-                <dt>${message(code: 'speciesList.wkt.label', default: 'WKT vector')}</dt>
-                <dd>${speciesList.wkt}</dd>
-            </g:if>
-            <dt>${message(code: 'speciesList.dateCreated.label', default: 'Date submitted')}</dt>
-            <dd><g:formatDate format="yyyy-MM-dd"
-                              date="${speciesList.dateCreated}"/><!-- ${speciesList.lastUpdated} --></dd>
-            <dt>${message(code: 'speciesList.lastUpdated.label', default: 'Date updated')}</dt>
-            <dd><g:formatDate format="yyyy-MM-dd"
-                              date="${speciesList.lastUpdated}"/></dd>
-            <dt>${message(code: 'speciesList.lastUploaded.label', default: 'Date last loaded')}</dt>
-            <dd><g:formatDate format="yyyy-MM-dd"
-                              date="${speciesList.lastUploaded}"/></dd>
-            <dt>${message(code: 'speciesList.lastMatched.label', default: 'Date last matched')}</dt>
-            <dd><g:formatDate format="yyyy-MM-dd"
-                              date="${speciesList.lastMatched}"/></dd>
-            <dt>${message(code: 'speciesList.isPrivate.label', default: 'Is private')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isPrivate ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.isBIE.label', default: 'Included in BIE')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isBIE ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.isAuthoritative.label', default: 'Authoritative')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isAuthoritative ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.isInvasive.label', default: 'Invasive')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isInvasive ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.isThreatened.label', default: 'Threatened')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isThreatened ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.isSDS.label', default: 'Part of the SDS')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.isSDS ?: false}" true="Yes" false="No"/></dd>
-            <dt>${message(code: 'speciesList.region.label', default: 'Region')}</dt>
-            <dd>${speciesList.region ?: 'Not provided'}</dd>
-            <g:if test="${speciesList.isSDS}">
-                <g:if test="${speciesList.authority}">
-                    <dt>${message(code: 'speciesList.authority.label', default: 'SDS Authority')}</dt>
-                    <dd>${speciesList.authority}</dd>
-                </g:if>
-                <g:if test="${speciesList.category}">
-                    <dt>${message(code: 'speciesList.category.label', default: 'SDS Category')}</dt>
-                    <dd>${speciesList.category}</dd>
-                </g:if>
-                <g:if test="${speciesList.generalisation}">
-                    <dt>${message(code: 'speciesList.generalisation.label', default: 'SDS Coordinate Generalisation')}</dt>
-                    <dd>${speciesList.generalisation}</dd>
-                </g:if>
-                <g:if test="${speciesList.sdsType}">
-                    <dt>${message(code: 'speciesList.sdsType.label', default: 'SDS Type')}</dt>
-                    <dd>${speciesList.sdsType}</dd>
-                </g:if>
-            </g:if>
-            <g:if test="${speciesList.editors && userCanEditPermissions}">
-                <dt>${message(code: 'speciesList.editors.label', default: 'List editors')}</dt>
-                <dd>${speciesList.editors.collect { sl.getFullNameForUserId(userId: it) }?.join(", ")}</dd>
-            </g:if>
-            <dt>${message(code: 'speciesList.looseSearch.label', default: 'Loose search')}</dt>
-            <dd><g:formatBoolean boolean="${speciesList.looseSearch}" true="Yes" false="No"/></dd>
+%{--    <div class="alert alert-info not-visible" id="list-meta-data">--}%
+%{--        <button type="button" class="close" onclick="$(this).parent().slideUp()">&times;</button>--}%
+%{--        <g:if test="${userCanEditPermissions}">--}%
+%{--            <a href="#" class="btn btn-default btn-sm" id="edit-meta-button"><i--}%
+%{--                    class="glyphicon glyphicon-pencil"></i> ${message(code:'view.lists.listinfo.edit.button.label', default:'Edit')}</a>--}%
+%{--        </g:if>--}%
+%{--        <dl class="dl-horizontal" id="show-meta-dl">--}%
+%{--            <dt>${message(code: 'speciesList.listName.label', default: 'List name')}</dt>--}%
+%{--            <dd>${speciesList.listName ?: '&nbsp;'}</dd>--}%
+%{--            <g:if test="${userCanEditPermissions || ownerVisibleToEditor}">--}%
+%{--                <dt>${message(code: 'speciesList.username.label', default: 'Owner')}</dt>--}%
+%{--                    <dd>${speciesList.fullName ?: speciesList.username}</dd>--}%
+%{--            </g:if>--}%
+%{--            <dt>${message(code: 'speciesList.listType.label', default: 'List type')}</dt>--}%
+%{--            <dd>${speciesList.listType?(message(code:speciesList.listType.i18nValue, default:speciesList.listType.displayValue)):''}</dd>--}%
+%{--            <!--dd>${speciesList.listType?.displayValue}</dd-->--}%
+%{--            <g:if test="${speciesList.description}">--}%
+%{--                <dt>${message(code: 'speciesList.description.label', default: 'Description')}</dt>--}%
+%{--                <dd>${speciesList.description}</dd>--}%
+%{--            </g:if>--}%
+%{--            <g:if test="${speciesList.url}">--}%
+%{--                <dt>${message(code: 'speciesList.url.label', default: 'URL')}</dt>--}%
+%{--                <dd><a href="${speciesList.url}" target="_blank">${speciesList.url}</a></dd>--}%
+%{--            </g:if>--}%
+%{--            <g:if test="${speciesList.wkt}">--}%
+%{--                <dt>${message(code: 'speciesList.wkt.label', default: 'WKT vector')}</dt>--}%
+%{--                <dd>${speciesList.wkt}</dd>--}%
+%{--            </g:if>--}%
+%{--            <dt>${message(code: 'speciesList.dateCreated.label', default: 'Date submitted')}</dt>--}%
+%{--            <dd><g:formatDate format="yyyy-MM-dd"--}%
+%{--                              date="${speciesList.dateCreated}"/><!-- ${speciesList.lastUpdated} --></dd>--}%
+%{--            <dt>${message(code: 'speciesList.lastUpdated.label', default: 'Date updated')}</dt>--}%
+%{--            <dd><g:formatDate format="yyyy-MM-dd"--}%
+%{--                              date="${speciesList.lastUpdated}"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.lastUploaded.label', default: 'Date last loaded')}</dt>--}%
+%{--            <dd><g:formatDate format="yyyy-MM-dd"--}%
+%{--                              date="${speciesList.lastUploaded}"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.lastMatched.label', default: 'Date last matched')}</dt>--}%
+%{--            <dd><g:formatDate format="yyyy-MM-dd"--}%
+%{--                              date="${speciesList.lastMatched}"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isPrivate.label', default: 'Is private')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isPrivate ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isBIE.label', default: 'Included in BIE')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isBIE ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isAuthoritative.label', default: 'Authoritative')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isAuthoritative ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isInvasive.label', default: 'Invasive')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isInvasive ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isThreatened.label', default: 'Threatened')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isThreatened ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.isSDS.label', default: 'Part of the SDS')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.isSDS ?: false}" true="Yes" false="No"/></dd>--}%
+%{--            <dt>${message(code: 'speciesList.region.label', default: 'Region')}</dt>--}%
+%{--            <dd>${speciesList.region ?: 'Not provided'}</dd>--}%
+%{--            <g:if test="${speciesList.isSDS}">--}%
+%{--                <g:if test="${speciesList.authority}">--}%
+%{--                    <dt>${message(code: 'speciesList.authority.label', default: 'SDS Authority')}</dt>--}%
+%{--                    <dd>${speciesList.authority}</dd>--}%
+%{--                </g:if>--}%
+%{--                <g:if test="${speciesList.category}">--}%
+%{--                    <dt>${message(code: 'speciesList.category.label', default: 'SDS Category')}</dt>--}%
+%{--                    <dd>${speciesList.category}</dd>--}%
+%{--                </g:if>--}%
+%{--                <g:if test="${speciesList.generalisation}">--}%
+%{--                    <dt>${message(code: 'speciesList.generalisation.label', default: 'SDS Coordinate Generalisation')}</dt>--}%
+%{--                    <dd>${speciesList.generalisation}</dd>--}%
+%{--                </g:if>--}%
+%{--                <g:if test="${speciesList.sdsType}">--}%
+%{--                    <dt>${message(code: 'speciesList.sdsType.label', default: 'SDS Type')}</dt>--}%
+%{--                    <dd>${speciesList.sdsType}</dd>--}%
+%{--                </g:if>--}%
+%{--            </g:if>--}%
+%{--            <g:if test="${speciesList.editors && userCanEditPermissions}">--}%
+%{--                <dt>${message(code: 'speciesList.editors.label', default: 'List editors')}</dt>--}%
+%{--                <dd>${speciesList.editors.collect { sl.getFullNameForUserId(userId: it) }?.join(", ")}</dd>--}%
+%{--            </g:if>--}%
+%{--            <dt>${message(code: 'speciesList.looseSearch.label', default: 'Loose search')}</dt>--}%
+%{--            <dd><g:formatBoolean boolean="${speciesList.looseSearch}" true="Yes" false="No"/></dd>--}%
 %{--            <dt>${message(code: 'speciesList.searchStyle.label', default: 'Search style')}</dt>--}%
 %{--            <dd>${speciesList.searchStyle}</dd>--}%
-            <dt>${message(code: 'speciesList.metadata.label', default: 'Metadata link')}</dt>
-            <dd><a href="${grailsApplication.config.collectory.baseURL}/public/show/${speciesList.dataResourceUid}">${grailsApplication.config.collectory.baseURL}/public/show/${speciesList.dataResourceUid}</a>
-            </dd>
-        </dl>
-        <g:if test="${userCanEditPermissions}">
-            <div id="edit-meta-div" class="not-visible">
-                <form class="form-horizontal" id="edit-meta-form">
-                    <input type="hidden" name="id" value="${speciesList.id}"/>
+%{--            <dt>${message(code: 'speciesList.metadata.label', default: 'Metadata link')}</dt>--}%
+%{--            <dd><a href="${grailsApplication.config.collectory.baseURL}/public/show/${speciesList.dataResourceUid}">${grailsApplication.config.collectory.baseURL}/public/show/${speciesList.dataResourceUid}</a>--}%
+%{--            </dd>--}%
+%{--        </dl>--}%
+%{--        <g:if test="${userCanEditPermissions}">--}%
+%{--            <div id="edit-meta-div" class="not-visible">--}%
+%{--                <form class="form-horizontal" id="edit-meta-form">--}%
+%{--                    <input type="hidden" name="id" value="${speciesList.id}"/>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="listName">${message(code: 'speciesList.listName.label', default: 'List name')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="listName">${message(code: 'speciesList.listName.label', default: 'List name')}</label>--}%
 
-                        <div class="col-md-10">
-                            <input type="text" name="listName" id="listName" class="form-control full-width" value="${speciesList.listName}"/>
-                        </div>
-                    </div>
+%{--                        <div class="col-md-10">--}%
+%{--                            <input type="text" name="listName" id="listName" class="form-control full-width" value="${speciesList.listName}"/>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
 %{--                    <div class="form-group">--}%
 %{--                        <label class="control-label col-md-2"--}%
@@ -612,288 +612,288 @@
 %{--                        </div>--}%
 %{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="listType">${message(code: 'speciesList.listType.label', default: 'List type')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="listType">${message(code: 'speciesList.listType.label', default: 'List type')}</label>--}%
 
-                        <div class="col-md-10">
-                            <select name="listType" id="listType" class="form-control full-width">
+%{--                        <div class="col-md-10">--}%
+%{--                            <select name="listType" id="listType" class="form-control full-width">--}%
 
 
-                                <g:each in="${au.org.ala.specieslist.ListType.values()}" var="type"><option value="${type.name()}" ${(speciesList.listType == type) ? 'selected="selected"':''}> ${message(code:type.i18nValue, default:type.displayValue)}</option></g:each>
+%{--                                <g:each in="${au.org.ala.specieslist.ListType.values()}" var="type"><option value="${type.name()}" ${(speciesList.listType == type) ? 'selected="selected"':''}> ${message(code:type.i18nValue, default:type.displayValue)}</option></g:each>--}%
 
-                            </select>
-                        </div>
-                    </div>
+%{--                            </select>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="description">${message(code: 'speciesList.description.label', default: 'Description')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="description">${message(code: 'speciesList.description.label', default: 'Description')}</label>--}%
 
-                        <div class="col-md-10">
-                            <textarea rows="3" name="description" id="description"
-                                      class="form-control">${speciesList.description}</textarea>
-                        </div>
-                    </div>
+%{--                        <div class="col-md-10">--}%
+%{--                            <textarea rows="3" name="description" id="description"--}%
+%{--                                      class="form-control">${speciesList.description}</textarea>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="url">${message(code: 'speciesList.url.label', default: 'URL')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="url">${message(code: 'speciesList.url.label', default: 'URL')}</label>--}%
 
-                        <div class="col-md-10">
-                            <input type="url" name="url" id="url" class="form-control full-width" value="${speciesList.url}"/>
-                        </div>
-                    </div>
+%{--                        <div class="col-md-10">--}%
+%{--                            <input type="url" name="url" id="url" class="form-control full-width" value="${speciesList.url}"/>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="description">${message(code: 'speciesList.wkt.label', default: 'WKT vector')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="description">${message(code: 'speciesList.wkt.label', default: 'WKT vector')}</label>--}%
 
-                        <div class="col-md-10">
-                            <textarea rows="3" name="wkt" id="wkt" class="form-control full-width">${speciesList.wkt}</textarea>
-                        </div>
-                    </div>
+%{--                        <div class="col-md-10">--}%
+%{--                            <textarea rows="3" name="wkt" id="wkt" class="form-control full-width">${speciesList.wkt}</textarea>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="dateCreated">${message(code: 'speciesList.dateCreated.label', default: 'Date submitted')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="dateCreated">${message(code: 'speciesList.dateCreated.label', default: 'Date submitted')}</label>--}%
 
-                        <div class="col-md-10">
-                            <input type="date" name="dateCreated" id="dateCreated" data-date-format="yyyy-mm-dd"
-                                   class="form-control full-width"
-                                   value="<g:formatDate format="yyyy-MM-dd" date="${speciesList.dateCreated ?: 0}"/>"/>
-                        </div>
-                    </div>
+%{--                        <div class="col-md-10">--}%
+%{--                            <input type="date" name="dateCreated" id="dateCreated" data-date-format="yyyy-mm-dd"--}%
+%{--                                   class="form-control full-width"--}%
+%{--                                   value="<g:formatDate format="yyyy-MM-dd" date="${speciesList.dateCreated ?: 0}"/>"/>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2"
-                               for="isPrivate">${message(code: 'speciesList.isPrivate.label', default: 'Is private')}</label>
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2"--}%
+%{--                               for="isPrivate">${message(code: 'speciesList.isPrivate.label', default: 'Is private')}</label>--}%
 
-                        <div class="col-md-10">
-                            <input type="checkbox" id="isPrivate" name="isPrivate" value="true"
-                                   data-value="${speciesList.isPrivate}" ${(speciesList.isPrivate == true) ? 'checked="checked"' : ''}/>
-                        </div>
-                    </div>
-                    <g:if test="${request.isUserInRole("ROLE_ADMIN")}">
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="isBIE">${message(code: 'speciesList.isBIE.label', default: 'Included in BIE')}</label>
+%{--                        <div class="col-md-10">--}%
+%{--                            <input type="checkbox" id="isPrivate" name="isPrivate" value="true"--}%
+%{--                                   data-value="${speciesList.isPrivate}" ${(speciesList.isPrivate == true) ? 'checked="checked"' : ''}/>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
+%{--                    <g:if test="${request.isUserInRole("ROLE_ADMIN")}">--}%
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="isBIE">${message(code: 'speciesList.isBIE.label', default: 'Included in BIE')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="checkbox" id="isBIE" name="isBIE" value="true"
-                                       data-value="${speciesList.isBIE}" ${(speciesList.isBIE == true) ? 'checked="checked"' : ''}/>
-                            </div>
-                        </div>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="checkbox" id="isBIE" name="isBIE" value="true"--}%
+%{--                                       data-value="${speciesList.isBIE}" ${(speciesList.isBIE == true) ? 'checked="checked"' : ''}/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="isAuthoritative">${message(code: 'speciesList.isAuthoritative.label', default: 'Authoritative')}</label>
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="isAuthoritative">${message(code: 'speciesList.isAuthoritative.label', default: 'Authoritative')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="checkbox" id="isAuthoritative" name="isAuthoritative"
-                                       value="true"
-                                       data-value="${speciesList.isAuthoritative}" ${(speciesList.isAuthoritative == true) ? 'checked="checked"' : ''}/>
-                            </div>
-                        </div>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="checkbox" id="isAuthoritative" name="isAuthoritative"--}%
+%{--                                       value="true"--}%
+%{--                                       data-value="${speciesList.isAuthoritative}" ${(speciesList.isAuthoritative == true) ? 'checked="checked"' : ''}/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="isInvasive">${message(code: 'speciesList.isInvasive.label', default: 'Invasive')}</label>
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="isInvasive">${message(code: 'speciesList.isInvasive.label', default: 'Invasive')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="checkbox" id="isInvasive" name="isInvasive" value="true"
-                                       data-value="${speciesList.isInvasive}" ${(speciesList.isInvasive == true) ? 'checked="checked"' : ''}/>
-                            </div>
-                        </div>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="checkbox" id="isInvasive" name="isInvasive" value="true"--}%
+%{--                                       data-value="${speciesList.isInvasive}" ${(speciesList.isInvasive == true) ? 'checked="checked"' : ''}/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="isThreatened">${message(code: 'speciesList.isThreatened.label', default: 'Threatened')}</label>
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="isThreatened">${message(code: 'speciesList.isThreatened.label', default: 'Threatened')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="checkbox" id="isThreatened" name="isThreatened"
-                                       value="true"
-                                       data-value="${speciesList.isThreatened}" ${(speciesList.isThreatened == true) ? 'checked="checked"' : ''}/>
-                            </div>
-                        </div>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="checkbox" id="isThreatened" name="isThreatened"--}%
+%{--                                       value="true"--}%
+%{--                                       data-value="${speciesList.isThreatened}" ${(speciesList.isThreatened == true) ? 'checked="checked"' : ''}/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="isSDS">${message(code: 'speciesList.isSDS.label', default: 'Part of the SDS')}</label>
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="isSDS">${message(code: 'speciesList.isSDS.label', default: 'Part of the SDS')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="checkbox" id="isSDS" name="isSDS" value="true"
-                                       data-value="${speciesList.isSDS}" ${(speciesList.isSDS == true) ? 'checked="checked"' : ''}/>
-                            </div>
-                        </div>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="checkbox" id="isSDS" name="isSDS" value="true"--}%
+%{--                                       data-value="${speciesList.isSDS}" ${(speciesList.isSDS == true) ? 'checked="checked"' : ''}/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group">
-                            <label class="control-label col-md-2"
-                                   for="region">${message(code: 'speciesList.region.label', default: 'Region')}</label>
+%{--                        <div class="form-group">--}%
+%{--                            <label class="control-label col-md-2"--}%
+%{--                                   for="region">${message(code: 'speciesList.region.label', default: 'Region')}</label>--}%
 
-                            <div class="col-md-10">
-                                <input type="text" name="region" id="region" class="form-control full-width"
-                                       value="${speciesList.region}"/>
-                            </div>
-                        </div>
-                        <g:if test="${speciesList.isSDS}">
-                            <div class="form-group">
-                                <label class="control-label col-md-2"
-                                       for="authority">${message(code: 'speciesList.authority.label', default: 'SDS Authority')}</label>
+%{--                            <div class="col-md-10">--}%
+%{--                                <input type="text" name="region" id="region" class="form-control full-width"--}%
+%{--                                       value="${speciesList.region}"/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                        <g:if test="${speciesList.isSDS}">--}%
+%{--                            <div class="form-group">--}%
+%{--                                <label class="control-label col-md-2"--}%
+%{--                                       for="authority">${message(code: 'speciesList.authority.label', default: 'SDS Authority')}</label>--}%
 
-                                <div class="col-md-10">
-                                    <input type="text" name="authority" id="authority" class="form-control full-width"
-                                           value="${speciesList.authority}"/>
-                                </div>
-                            </div>
+%{--                                <div class="col-md-10">--}%
+%{--                                    <input type="text" name="authority" id="authority" class="form-control full-width"--}%
+%{--                                           value="${speciesList.authority}"/>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2"
-                                       for="category">${message(code: 'speciesList.category.label', default: 'SDS Category')}</label>
+%{--                            <div class="form-group">--}%
+%{--                                <label class="control-label col-md-2"--}%
+%{--                                       for="category">${message(code: 'speciesList.category.label', default: 'SDS Category')}</label>--}%
 
-                                <div class="col-md-10">
-                                    <input type="text" name="category" id="category" class="form-control full-width"
-                                           value="${speciesList.category}"/>
-                                </div>
-                            </div>
+%{--                                <div class="col-md-10">--}%
+%{--                                    <input type="text" name="category" id="category" class="form-control full-width"--}%
+%{--                                           value="${speciesList.category}"/>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2"
-                                       for="generalisation">${message(code: 'speciesList.generalisation.label', default: 'SDS Generalisation')}</label>
+%{--                            <div class="form-group">--}%
+%{--                                <label class="control-label col-md-2"--}%
+%{--                                       for="generalisation">${message(code: 'speciesList.generalisation.label', default: 'SDS Generalisation')}</label>--}%
 
-                                <div class="col-md-10">
-                                    <input type="text" name="generalisation" id="generalisation" class="form-control full-width"
-                                           value="${speciesList.generalisation}"/>
-                                </div>
-                            </div>
+%{--                                <div class="col-md-10">--}%
+%{--                                    <input type="text" name="generalisation" id="generalisation" class="form-control full-width"--}%
+%{--                                           value="${speciesList.generalisation}"/>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2"
-                                       for="sdsType">${message(code: 'speciesList.sdsType.label', default: 'SDS Type')}</label>
+%{--                            <div class="form-group">--}%
+%{--                                <label class="control-label col-md-2"--}%
+%{--                                       for="sdsType">${message(code: 'speciesList.sdsType.label', default: 'SDS Type')}</label>--}%
 
-                                <div class="col-md-10">
-                                    <input type="text" name="sdsType" id="sdsType" class="form-control full-width"
-                                           value="${speciesList.sdsType}"/>
-                                </div>
-                            </div>
-                        </g:if>
-                    </g:if>
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="looseSearch">${message(code:'speciesList.looseSearch.label', default:'Loose Search')}</label>
-                        <div class="col-md-10">
-                            <g:select noSelection="${['':'--']}" from="[true, false]" name="looseSearch" style="width:99%" value="${speciesList.looseSearch}" />
-                        </div>
-                    </div>
+%{--                                <div class="col-md-10">--}%
+%{--                                    <input type="text" name="sdsType" id="sdsType" class="form-control full-width"--}%
+%{--                                           value="${speciesList.sdsType}"/>--}%
+%{--                                </div>--}%
+%{--                            </div>--}%
+%{--                        </g:if>--}%
+%{--                    </g:if>--}%
+%{--                    <div class="form-group">--}%
+%{--                        <label class="control-label col-md-2" for="looseSearch">${message(code:'speciesList.looseSearch.label', default:'Loose Search')}</label>--}%
+%{--                        <div class="col-md-10">--}%
+%{--                            <g:select noSelection="${['':'--']}" from="[true, false]" name="looseSearch" style="width:99%" value="${speciesList.looseSearch}" />--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
 %{--                    <div class="form-group">--}%
 %{--                        <label class="control-label col-md-2" for="searchStyle">${message(code:'speciesList.searchStyle.label', default:'Search Style')}</label>--}%
 %{--                        <div class="col-md-10">--}%
 %{--                            <g:select name="searchStyle" noSelection="${['':'--']}" from="${au.org.ala.names.ws.api.SearchStyle.values()}" style="width:99%" value="${speciesList.searchStyle}" />--}%
 %{--                        </div>--}%
 %{--                    </div>--}%
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" id="edit-meta-submit" class="btn btn-primary">${message(code:'generic.lists.button.save.label', default:'Save')}</button>
-                            <button class="btn btn-default" onclick="toggleEditMeta(false);
-                            return false;">${message(code:'generic.lists.button.cancel.label', default:'Cancel')}</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </g:if>
-    </div>
+%{--                    <div class="form-group">--}%
+%{--                        <div class="col-md-offset-2 col-md-10">--}%
+%{--                            <button type="submit" id="edit-meta-submit" class="btn btn-primary">${message(code:'generic.lists.button.save.label', default:'Save')}</button>--}%
+%{--                            <button class="btn btn-default" onclick="toggleEditMeta(false);--}%
+%{--                            return false;">${message(code:'generic.lists.button.cancel.label', default:'Cancel')}</button>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
+%{--                </form>--}%
+%{--            </div>--}%
+%{--        </g:if>--}%
+%{--    </div>--}%
 
-    <g:if test="${flash.message}">
-        <div class="inner row">
-            <div class="message alert alert-info"><b>${message(code:'generic.lists.button.alert.label', default:'Alert')}:</b> ${flash.message}</div>
-        </div>
-    </g:if>
+%{--    <g:if test="${flash.message}">--}%
+%{--        <div class="inner row">--}%
+%{--            <div class="message alert alert-info"><b>${message(code:'generic.lists.button.alert.label', default:'Alert')}:</b> ${flash.message}</div>--}%
+%{--        </div>--}%
+%{--    </g:if>--}%
 
-    <div class="inner row">
-        <div class="col-md-2 well" id="facets-column">
-            <div class="boxedZ attachedZ">
-                <section class="meta">
-                    <div class="matchStats">
-                        <p>
-                            <span class="count">${totalCount}</span>
-                                ${message(code:'public.lists.facets.matchstats01', default:'Number of Taxa')}
-                        </p>
+%{--    <div class="inner row">--}%
+%{--        <div class="col-md-2 well" id="facets-column">--}%
+%{--            <div class="boxedZ attachedZ">--}%
+%{--                <section class="meta">--}%
+%{--                    <div class="matchStats">--}%
+%{--                        <p>--}%
+%{--                            <span class="count">${totalCount}</span>--}%
+%{--                                ${message(code:'public.lists.facets.matchstats01', default:'Number of Taxa')}--}%
+%{--                        </p>--}%
 
-                        <p>
-                            <span class="count">${distinctCount}</span>
-                                ${message(code:'public.lists.facets.matchstats02', default:'Distinct Species')}
-                        </p>
-                        <g:if test="${hasUnrecognised && noMatchCount != totalCount}">
-                            <p>
-                                <span class="count">${noMatchCount}</span>
-                                <g:link action="list" id="${params.id}" title="${message(code:'public.lists.facets.matchstats03.tooltip', default:'View unrecognised taxa')}"
-                                        params="${[fq: sl.buildFqList(fqs: fqs, fq: "guid:null"), max: params.max]}">${message(code:'public.lists.facets.matchstats03', default:'Unrecognised Taxa')}</g:link>
-                            </p>
-                        </g:if>
-                    </div>
-                </section>
-                <section class="refine" id="refine">
-                    <g:if test="${facets.size() > 0 || params.fq}">
-                        <h4 class="hidden-xs">${message(code:'public.lists.facets.refine.header',default:'Refine results')}</h4>
-                        <h4 class="visible-xs">
-                            <a href="#" id="toggleFacetDisplay"><i class="glyphicon glyphicon-chevron-right"
-                                                                   id="facetIcon"></i>
-                                ${message(code:'public.lists.facets.refine.header',default:'Refine results')}</a>
-                        </h4>
+%{--                        <p>--}%
+%{--                            <span class="count">${distinctCount}</span>--}%
+%{--                                ${message(code:'public.lists.facets.matchstats02', default:'Distinct Species')}--}%
+%{--                        </p>--}%
+%{--                        <g:if test="${hasUnrecognised && noMatchCount != totalCount}">--}%
+%{--                            <p>--}%
+%{--                                <span class="count">${noMatchCount}</span>--}%
+%{--                                <g:link action="list" id="${params.id}" title="${message(code:'public.lists.facets.matchstats03.tooltip', default:'View unrecognised taxa')}"--}%
+%{--                                        params="${[fq: sl.buildFqList(fqs: fqs, fq: "guid:null"), max: params.max]}">${message(code:'public.lists.facets.matchstats03', default:'Unrecognised Taxa')}</g:link>--}%
+%{--                            </p>--}%
+%{--                        </g:if>--}%
+%{--                    </div>--}%
+%{--                </section>--}%
+%{--                <section class="refine" id="refine">--}%
+%{--                    <g:if test="${facets.size() > 0 || params.fq}">--}%
+%{--                        <h4 class="hidden-xs">${message(code:'public.lists.facets.refine.header',default:'Refine results')}</h4>--}%
+%{--                        <h4 class="visible-xs">--}%
+%{--                            <a href="#" id="toggleFacetDisplay"><i class="glyphicon glyphicon-chevron-right"--}%
+%{--                                                                   id="facetIcon"></i>--}%
+%{--                                ${message(code:'public.lists.facets.refine.header',default:'Refine results')}</a>--}%
+%{--                        </h4>--}%
 
-                        <div class="hidden-xs" id="accordion">
-                            <g:set var="fqs" value="${params.list('fq')}"/>
-                            <g:if test="${fqs.size() > 0 && fqs.get(0).length() > 0}">
-                                <div id="currentFilter">
-                                    <p>
-                                        <span class="FieldName">Current Filters</span>
-                                    </p>
+%{--                        <div class="hidden-xs" id="accordion">--}%
+%{--                            <g:set var="fqs" value="${params.list('fq')}"/>--}%
+%{--                            <g:if test="${fqs.size() > 0 && fqs.get(0).length() > 0}">--}%
+%{--                                <div id="currentFilter">--}%
+%{--                                    <p>--}%
+%{--                                        <span class="FieldName">Current Filters</span>--}%
+%{--                                    </p>--}%
 
-                                    <div id="currentFilters" class="subnavlist">
-                                        <ul class="facets list-unstyled">
-                                            <g:each in="${fqs}" var="fq">
-                                                <g:if test="${fq.length() > 0}">
-                                                    <li>
-                                                        <g:link action="list" id="${params.id}"
-                                                                params="${[fq: sl.excludedFqList(fqs: fqs, fq: fq), max: params.max, q: params.q]}"
-                                                                class="removeLink" title="${message(code:'public.lists.facets.refine.tooltip',default:'Uncheck (remove filter)')}">
-                                                            <span class="fa fa-check-square-o">&nbsp;</span>
-                                                            <g:message code="facet.${fq.replaceFirst("kvp ", "")}"
-                                                                       default="${fq.replaceFirst("kvp ", "")}"/>
-                                                        </g:link>
-                                                    </li>
-                                                </g:if>
-                                            </g:each>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </g:if>
+%{--                                    <div id="currentFilters" class="subnavlist">--}%
+%{--                                        <ul class="facets list-unstyled">--}%
+%{--                                            <g:each in="${fqs}" var="fq">--}%
+%{--                                                <g:if test="${fq.length() > 0}">--}%
+%{--                                                    <li>--}%
+%{--                                                        <g:link action="list" id="${params.id}"--}%
+%{--                                                                params="${[fq: sl.excludedFqList(fqs: fqs, fq: fq), max: params.max, q: params.q]}"--}%
+%{--                                                                class="removeLink" title="${message(code:'public.lists.facets.refine.tooltip',default:'Uncheck (remove filter)')}">--}%
+%{--                                                            <span class="fa fa-check-square-o">&nbsp;</span>--}%
+%{--                                                            <g:message code="facet.${fq.replaceFirst("kvp ", "")}"--}%
+%{--                                                                       default="${fq.replaceFirst("kvp ", "")}"/>--}%
+%{--                                                        </g:link>--}%
+%{--                                                    </li>--}%
+%{--                                                </g:if>--}%
+%{--                                            </g:each>--}%
+%{--                                        </ul>--}%
+%{--                                    </div>--}%
+%{--                                </div>--}%
+%{--                            </g:if>--}%
 
-                            <g:each in="${facets}" var="entry">
-                                <g:if test="${entry.key == "listProperties"}">
-                                    <g:each in="${facets.get("listProperties")}" var="value">
-                                        <g:render template="facet"
-                                                  model="${[key: value.getKey(), values: value.getValue(), isProperty: true]}"/>
-                                    </g:each>
-                                    <div style="display:none"><!-- fancybox popup div -->
-                                        <div id="multipleFacets">
-                                            <p>${message(code:'public.lists.facets.refine.box.header', default:'Refine your search')}</p>
+%{--                            <g:each in="${facets}" var="entry">--}%
+%{--                                <g:if test="${entry.key == "listProperties"}">--}%
+%{--                                    <g:each in="${facets.get("listProperties")}" var="value">--}%
+%{--                                        <g:render template="facet"--}%
+%{--                                                  model="${[key: value.getKey(), values: value.getValue(), isProperty: true]}"/>--}%
+%{--                                    </g:each>--}%
+%{--                                    <div style="display:none"><!-- fancybox popup div -->--}%
+%{--                                        <div id="multipleFacets">--}%
+%{--                                            <p>${message(code:'public.lists.facets.refine.box.header', default:'Refine your search')}</p>--}%
 
-                                            <div id="dynamic" class="tableContainer"></div>
-                                        </div>
-                                    </div>
-                                </g:if>
-                                <g:else>
-                                    <g:render template="facet"
-                                              model="${[key: entry.key, values: entry.value, isProperty: false]}"/>
-                                </g:else>
-                            </g:each>
-                        </div>
-                    </g:if>
-                </section>
-            </div><!-- boxed attached -->
-        </div> <!-- col narrow -->
+%{--                                            <div id="dynamic" class="tableContainer"></div>--}%
+%{--                                        </div>--}%
+%{--                                    </div>--}%
+%{--                                </g:if>--}%
+%{--                                <g:else>--}%
+%{--                                    <g:render template="facet"--}%
+%{--                                              model="${[key: entry.key, values: entry.value, isProperty: false]}"/>--}%
+%{--                                </g:else>--}%
+%{--                            </g:each>--}%
+%{--                        </div>--}%
+%{--                    </g:if>--}%
+%{--                </section>--}%
+%{--            </div><!-- boxed attached -->--}%
+%{--        </div> <!-- col narrow -->--}%
         <div class="col-md-10">
-        <div class="row">
+%{--        <div class="row">--}%
 %{--            <div class="col-md-6">--}%
 %{--                <div id="listItemView" class="btn-group">--}%
 %{--                    <a class="btn btn-default btn-sm list disabled" title="${message(code:'public.lists.view.page.tooltip02', default:'View as detailed list')} " id="toggleList" href="#"><i--}%
@@ -902,24 +902,24 @@
 %{--                            class="glyphicon glyphicon-th"></i> ${message(code:'public.lists.view.page.button03', default:'grid')}</a>--}%
 %{--                </div>--}%
 %{--            </div>--}%
-            <div class="col-md-6">
-                <form class="listSearchForm">
-                <div id="searchView" class="searchItemForm">
-                        <div class="input-group" id="searchListItem">
-                            <input class="form-control" id="searchInputButton" name="q" type="text" value="${params.q}"
-                                   placeholder="${message(code:'public.lists.find.items.text', default:'by supplied, scientific or common names')}">
+%{--            <div class="col-md-6">--}%
+%{--                <form class="listSearchForm">--}%
+%{--                <div id="searchView" class="searchItemForm">--}%
+%{--                        <div class="input-group" id="searchListItem">--}%
+%{--                            <input class="form-control" id="searchInputButton" name="q" type="text" value="${params.q}"--}%
+%{--                                   placeholder="${message(code:'public.lists.find.items.text', default:'by supplied, scientific or common names')}">--}%
 
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">${message(code:'generic.lists.button.find.items.label', default:'Find species')}</button>
-                                <g:if test="${params.q}">
-                                    <button class="btn btn-default" onclick="resetSearch()">${message(code:'generic.lists.button.clearSearch.label', default:'Clear find')}</button>
-                                </g:if>
-                            </div>
-                        </div>
-                </div>
-                </form>
-            </div>
-        </div>
+%{--                            <div class="input-group-btn">--}%
+%{--                                <button class="btn btn-primary" type="submit">${message(code:'generic.lists.button.find.items.label', default:'Find species')}</button>--}%
+%{--                                <g:if test="${params.q}">--}%
+%{--                                    <button class="btn btn-default" onclick="resetSearch()">${message(code:'generic.lists.button.clearSearch.label', default:'Clear find')}</button>--}%
+%{--                                </g:if>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                </div>--}%
+%{--                </form>--}%
+%{--            </div>--}%
+%{--        </div>--}%
 
 %{--            <div id="gridView" class="not-visible">--}%
 %{--                <g:each var="result" in="${results}" status="i">--}%
