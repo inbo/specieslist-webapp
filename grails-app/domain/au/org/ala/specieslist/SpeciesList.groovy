@@ -48,7 +48,7 @@ class SpeciesList {
     String sdsType
     Boolean looseSearch // if undefined use the server default
     //SearchStyle searchStyle // if undefined use the server default
-    String ownerFullName // derived by concatenating the firstName and surname fields
+    String ownerFullName = ""// derived by concatenating the firstName and surname fields
     static transients = [ "fullName" ]
 
     static hasMany = [items: SpeciesListItem, editors: String]
