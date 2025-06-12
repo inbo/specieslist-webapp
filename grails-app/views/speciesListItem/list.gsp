@@ -42,6 +42,42 @@
     .action-btn-group-width {
         width: 100px;
     }
+
+    /* Grid view */
+    .imgCon {
+      display: inline-block;
+      /* margin-right: 8px; */
+      text-align: center;
+      line-height: 1.3em;
+      background-color: #DDD;
+      color: #DDD;
+      font-size: 12px;
+      margin: 2px 0 2px 0;
+      position: relative;
+    }
+    .imgCon img {
+      height: 180px;
+    }
+    .imgCon .meta {
+      opacity: 0.8;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      text-align: left;
+      padding: 4px 5px 2px 5px;
+    }
+    .imgCon .brief {
+      color: black;
+      background-color: white;
+    }
+    .imgCon .detail {
+      color: white;
+      background-color: black;
+      opacity: 0.7;
+    }
+
     </style>
 
     <asset:script type="text/javascript" asset-defer="">
