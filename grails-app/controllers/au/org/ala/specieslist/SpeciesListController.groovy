@@ -18,19 +18,12 @@ import au.org.ala.web.AuthService
 //import au.org.ala.names.ws.api.SearchStyle
 import com.opencsv.CSVReader
 import grails.converters.JSON
-import grails.gorm.transactions.NotTransactional
 import grails.gorm.transactions.Transactional
 import groovy.time.TimeCategory
-import org.apache.commons.io.filefilter.FalseFileFilter
 import org.grails.web.json.JSONObject
-import org.hibernate.criterion.DetachedCriteria
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
 import javax.annotation.PostConstruct
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import java.lang.management.ManagementFactory
-import com.sun.management.OperatingSystemMXBean
 
 class SpeciesListController {
 
@@ -89,7 +82,7 @@ class SpeciesListController {
         log.debug("Deleting from collectory (${params.id})")
         def sl = SpeciesList.get(params.id)
         if(sl){
-            helperService.deleteDataResourceForList(sl.dataResourceUid)
+            helperService.deleteDataResourceForList(sl.dataResourceUid, false)
             List msIds = SpeciesListItem.executeQuery("select sli.matchedSpecies.id as id from SpeciesListItem as sli where dataResourceUid = :dataResourceUid", ["dataResourceUid": sl.dataResourceUid])
             SpeciesListItem.executeUpdate("delete from SpeciesListItem where dataResourceUid = :dataResourceUid", ["dataResourceUid": sl.dataResourceUid])
             log.debug("Deleted species in list: ${sl.dataResourceUid}")
@@ -112,7 +105,7 @@ class SpeciesListController {
      */
     def deleteList(){
         log.debug("Deleting from collectory...")
-        helperService.deleteDataResourceForList(params.id)
+        helperService.deleteDataResourceForList(params.id, false)
 
         //delete all the items that belong to the specified list
         //SpeciesListItem.where {dataResourceUid == params.id}.deleteAll()
@@ -240,6 +233,11 @@ class SpeciesListController {
                     def msg = message(code:'upload.lists.uploadprocess.errormessage', default:'Unable to upload species data. Please ensure the column containing the species name has been identified.')
                     def map = [url: url, error: itemCount.successfulItems > 0 ? null : msg]
                     render map as JSON
+                }
+                catch(SpeciesListCreateException e){
+                    // delete corresponding data resource if it has been created
+                    log.error("Species list (${formParams.speciesListName}) creation failed: ${e.getMessage()}. Deleting data resource from collectory: (${druid})", e.getCause())
+                    helperService.deleteDataResourceForList(druid, true)
                 }
                 finally {
                     reader?.close()
