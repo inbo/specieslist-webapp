@@ -18,15 +18,9 @@ package au.org.ala.specieslist
 import au.org.ala.names.ws.api.NameUsageMatch
 //import au.org.ala.names.ws.api.SearchStyle
 import com.opencsv.CSVReader
-import com.sun.management.OperatingSystemMXBean
 import grails.gorm.transactions.NotTransactional
 import grails.gorm.transactions.Transactional
-import net.bytebuddy.matcher.NameMatcher
 import org.hibernate.Session
-
-import java.lang.management.ManagementFactory
-import java.time.LocalDateTime
-import java.sql.Timestamp
 import groovy.time.*
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
@@ -131,8 +125,8 @@ class HelperService {
         }
     }
 
-    def deleteDataResourceForList(drId) {
-        if(grailsApplication.config.getProperty('collectory.enableSync', Boolean, false)){
+    def deleteDataResourceForList(drId, boolean forceDelete) {
+        if(grailsApplication.config.getProperty('collectory.enableSync', Boolean, false) || forceDelete) {
             def deleteUrl = grailsApplication.config.collectory.baseURL +"/ws/dataResource/" + drId
             def http = new HTTPBuilder(deleteUrl)
             http.getClient().getParams().setParameter("http.socket.timeout", new Integer(5000))
@@ -446,79 +440,85 @@ class HelperService {
     def loadSpeciesListFromCSV(CSVReader reader, druid, listname, ListType listType, description, listUrl, listWkt,
                                Boolean isBIE, Boolean isSDS, Boolean isAuthoritative, Boolean isThreatened, Boolean isInvasive,
                                Boolean isPrivate, String region, String authority, String category,
-                               String generalisation, String sdsType, Boolean looseSearch, /*SearchStyle searchStyle,*/ String[] header, Map vocabs) {
-        log.debug("Loading species list " + druid + " " + listname + " " + description + " " + listUrl + " " + header + " " + vocabs)
+                               String generalisation, String sdsType, Boolean looseSearch, /*SearchStyle searchStyle,*/ String[] header, Map vocabs) throws SpeciesListCreateException {
+        try {
 
-        def kvpmap = [:]
-        addVocab(druid,vocabs,kvpmap)
-        //attempt to retrieve an existing list first
-        SpeciesList sl = SpeciesList.findByDataResourceUid(druid)?:new SpeciesList()
-        if (sl.dataResourceUid){
-            sl.items.clear()
-        }
-        sl.listName = listname
-        sl.dataResourceUid=druid
-        sl.username = localAuthService.email() ?: "info@ala.org.au"
-        sl.userId = authService.userId ?: 2729
-        sl.firstName = localAuthService.firstname()
-        sl.surname = localAuthService.surname()
-        sl.description = description
-        sl.url = listUrl
-        sl.wkt = listWkt
-        sl.listType = listType
-        sl.region = region
-        sl.authority = authority
-        sl.category = category
-        sl.generalisation = generalisation
-        sl.sdsType = sdsType
-        sl.isBIE = isBIE
-        sl.isSDS = isSDS
-        sl.isAuthoritative = isAuthoritative
-        sl.isThreatened = isThreatened
-        sl.isInvasive = isInvasive
-        sl.isPrivate = isPrivate
-        sl.looseSearch = looseSearch
-        //sl.searchStyle = searchStyle
-        sl.lastUploaded = new Date()
-        sl.lastMatched = new Date()
-        String [] nextLine
-        boolean checkedHeader = false
-        Map termIdx = columnMatchingService.getTermAndIndex(header)
-        int itemCount = 0
-        int totalCount = 0
-        log.info('Loading records from CSV/Excel...')
-        String[] rawHeaders = []
-        while ((nextLine = reader.readNext()) != null) {
-            totalCount++
-            if(!checkedHeader){
-                checkedHeader = true
-                rawHeaders = nextLine
-                // only read next line if current line is a header line
-                if(columnMatchingService.getTermAndIndex(nextLine).size() > 0) {
-                    nextLine = reader.readNext()
+            log.debug("Loading species list " + druid + " " + listname + " " + description + " " + listUrl + " " + header + " " + vocabs)
+
+            def kvpmap = [:]
+            addVocab(druid, vocabs, kvpmap)
+            //attempt to retrieve an existing list first
+            SpeciesList sl = SpeciesList.findByDataResourceUid(druid) ?: new SpeciesList()
+            if (sl.dataResourceUid) {
+                sl.items.clear()
+            }
+            sl.listName = listname
+            sl.dataResourceUid = druid
+            sl.username = localAuthService.email() ?: "info@ala.org.au"
+            sl.userId = authService.userId ?: 2729
+            sl.firstName = localAuthService.firstname()
+            sl.surname = localAuthService.surname()
+            sl.description = description
+            sl.url = listUrl
+            sl.wkt = listWkt
+            sl.listType = listType
+            sl.region = region
+            sl.authority = authority
+            sl.category = category
+            sl.generalisation = generalisation
+            sl.sdsType = sdsType
+            sl.isBIE = isBIE
+            sl.isSDS = isSDS
+            sl.isAuthoritative = isAuthoritative
+            sl.isThreatened = isThreatened
+            sl.isInvasive = isInvasive
+            sl.isPrivate = isPrivate
+            sl.looseSearch = looseSearch
+            //sl.searchStyle = searchStyle
+            sl.lastUploaded = new Date()
+            sl.lastMatched = new Date()
+            String[] nextLine
+            boolean checkedHeader = false
+            Map termIdx = columnMatchingService.getTermAndIndex(header)
+            int itemCount = 0
+            int totalCount = 0
+            log.info('Loading records from CSV/Excel...')
+            String[] rawHeaders = []
+            while ((nextLine = reader.readNext()) != null) {
+                totalCount++
+                if (!checkedHeader) {
+                    checkedHeader = true
+                    rawHeaders = nextLine
+                    // only read next line if current line is a header line
+                    if (columnMatchingService.getTermAndIndex(nextLine).size() > 0) {
+                        nextLine = reader.readNext()
+                    }
+                }
+
+                if (nextLine.length > 0 && termIdx.size() > 0 && hasValidData(termIdx, nextLine)) {
+                    itemCount++
+                    sl.addToItems(insertSpeciesItem(nextLine, druid, termIdx, header, rawHeaders, kvpmap, itemCount, sl))
+                }
+                if (totalCount % 500 == 0) {
+                    log.info("${totalCount} records have been processed.")
                 }
             }
-
-            if(nextLine.length > 0 && termIdx.size() > 0 && hasValidData(termIdx, nextLine)){
-                itemCount++
-                sl.addToItems(insertSpeciesItem(nextLine, druid, termIdx, header, rawHeaders,kvpmap, itemCount, sl))
+            log.info("Completed ${totalCount} records in total")
+            if (!sl.validate()) {
+                log.error(sl.errors.allErrors?.toString())
             }
-            if (totalCount % 500 == 0) {
-                log.info("${totalCount} records have been processed.")
-            }
-        }
-        log.info("Completed ${totalCount} records in total")
-        if(!sl.validate()){
-            log.error(sl.errors.allErrors?.toString())
-        }
 
-        log.info("Matching ${totalCount} records....")
-        List sli = sl.getItems()?.toList()
-        matchCommonNamesForSpeciesListItems(sli)
-        log.info("Saving ${totalCount} records....")
-        sl.save()
-        log.info("${totalCount} records saved")
-        [totalRecords: totalCount, successfulItems: itemCount]
+            log.info("Matching ${totalCount} records....")
+            List sli = sl.getItems()?.toList()
+            matchCommonNamesForSpeciesListItems(sli)
+            log.info("Saving ${totalCount} records....")
+            sl.save()
+            log.info("${totalCount} records saved")
+            [totalRecords: totalCount, successfulItems: itemCount]
+        }
+        catch (Exception e) {
+            throw new SpeciesListCreateException("Failed to create species list ${listname} for data resource ${druid}. Error message: ${e.getMessage()}" , e)
+        }
     }
 
     @Deprecated
