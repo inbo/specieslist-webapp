@@ -641,27 +641,32 @@ class QueryService {
                         pos = facet.indexOf(":")
                         String key = facet.substring(0, pos)
                         String value = facet.substring(pos + 1)
+                        String keyAnchor = 'key_kvp_' + key
+                        String valueAnchor = 'value_kvp_' + key
                         query.append(" join sli.kvpValues kvp").append(sindex)
-                        whereBuilder.append(" AND kvp").append(sindex).append(".key=:key AND kvp").append(sindex).append(".value=:value")
-                        queryparams << [key: key, value: value]
+                        whereBuilder.append(" AND kvp").append(sindex).append(".key=:$keyAnchor AND kvp").append(sindex).append(".value=:$valueAnchor")
+                        queryparams.put(keyAnchor, key)
+                        queryparams.put(valueAnchor, value)
                     } else if (facet.startsWith("matched ")) {
                         String sindex = index.toString()
                         facet = facet.replaceFirst("matched ", "")
                         pos = facet.indexOf(":")
                         String key = facet.substring(0, pos)
                         String value = facet.substring(pos + 1)
+                        String valueAnchor = 'value_matched_' + key
                         query.append(" join sli.matchedSpecies matched").append(sindex)
-                        whereBuilder.append(" AND matched").append(sindex).append(".").append(validMatchedSpeciesField(key)).append("=:value")
-                        queryparams << [value: value]
+                        whereBuilder.append(" AND matched").append(sindex).append(".").append(validMatchedSpeciesField(key)).append("=:$valueAnchor")
+                        queryparams.put(valueAnchor, value)
                     } else {
                         String key = facet.substring(0, pos)
                         String value = facet.substring(pos + 1)
+                        String valueAnchor = 'value_' + key
                         whereBuilder.append(" AND sli.").append(key)
                         if (value.equalsIgnoreCase("null")) {
                             whereBuilder.append(" is null")
                         } else {
-                            whereBuilder.append("=:value ")
-                            queryparams << [value: value]
+                            whereBuilder.append("=:$valueAnchor ")
+                            queryparams.put(valueAnchor, value)
                         }
                     }
                 }
