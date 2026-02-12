@@ -22,6 +22,7 @@ class AdminController {
     def queryService
     def helperService
     def userDetailsService
+    def authService
 
     def index() { redirect(action: 'speciesLists') }
 
@@ -65,7 +66,8 @@ class AdminController {
                          typeFacets: (params.listType) ? null : queryService.getTypeFacetCounts(params, false, itemsIds),
                          tagFacets: queryService.getTagFacetCounts(params, itemsIds),
                          selectedFacets:queryService.getSelectedFacets(params),
-                         rematchLogs: rematchLogs
+                         rematchLogs: rematchLogs,
+                         userId: authService.getUserId()
             ]
             if (searchTerm) {
                 params.q = searchTerm

@@ -329,7 +329,9 @@ class SpeciesListController {
                     total: lists.totalCount,
                     typeFacets: typeFacets,
                     tagFacets : tagFacets,
-                    selectedFacets: queryService.getSelectedFacets(params)]
+                    selectedFacets: queryService.getSelectedFacets(params),
+                    userId: userId
+            ]
             if (searchTerm) {
                 params.q = searchTerm
                 model.errors = "Error: Search terms must contain at least 3 characters"
@@ -367,7 +369,9 @@ class SpeciesListController {
             render(view:'/speciesListItem/list', model:[results: speciesListItems,
                         totalCount:SpeciesListItem.countByDataResourceUid(params.id),
                         noMatchCount:SpeciesListItem.countByDataResourceUidAndGuidIsNull(params.id),
-                        distinctCount:distinctCount, keys:keys])
+                        distinctCount:distinctCount,
+                        keys:keys,
+                        userId:authService.getUserId()])
         }
         catch(Exception e){
             render(view: '../error', model: [message: "Unable to retrieve species lists. Please let us know if this error persists. <br>Error:<br>" + e.getMessage()])
