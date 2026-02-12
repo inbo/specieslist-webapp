@@ -56,6 +56,7 @@ class PublicController {
             def model = [
                     isAdmin: localAuthService.isAdmin(),
                     isLoggedIn: (authService.userId) != null,
+                    userId: authService.userId,
                     lists: lists,
                     total: lists.totalCount,
                     typeFacets: (params.listType) ? null : queryService.getTypeFacetCounts(params, hidePrivateLists, itemsIds),

@@ -216,7 +216,7 @@
                     <td><g:formatDate format="yyyy-MM-dd" date="${list.lastUpdated}"/></td>
                     <td><g:formatDate format="yyyy-MM-dd" date="${list.lastUploaded}"/></td>
                     <td>${list.itemsCount}</td>
-                    <g:if test="${showActions && (list.username == request.remoteUser || request.isUserInRole("ROLE_ADMIN"))}">
+                    <g:if test="${showActions && (list.userId == userId || request.isUserInRole("ROLE_ADMIN"))}">
                         <td>
                             <g:set var="test" value="${[id: list.id]}"/>
                             <a href="#"
