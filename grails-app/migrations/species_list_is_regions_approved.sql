@@ -1,0 +1,1 @@
+alter table species_list add is_regions_approved bit;
