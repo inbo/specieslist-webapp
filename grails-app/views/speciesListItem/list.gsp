@@ -583,6 +583,8 @@
             <dd><g:formatBoolean boolean="${speciesList.isBIE ?: false}" true="Yes" false="No"/></dd>
             <dt>${message(code: 'speciesList.isAuthoritative.label', default: 'Authoritative')}</dt>
             <dd><g:formatBoolean boolean="${speciesList.isAuthoritative ?: false}" true="Yes" false="No"/></dd>
+            <dt>${message(code: 'speciesList.isRegionsApproved.label', default: 'Included in Regions')}</dt>
+            <dd><g:formatBoolean boolean="${speciesList.isRegionsApproved ?: false}" true="Yes" false="No"/></dd>
             <dt>${message(code: 'speciesList.isInvasive.label', default: 'Invasive')}</dt>
             <dd><g:formatBoolean boolean="${speciesList.isInvasive ?: false}" true="Yes" false="No"/></dd>
             <dt>${message(code: 'speciesList.isThreatened.label', default: 'Threatened')}</dt>
@@ -729,6 +731,17 @@
                                 <input type="checkbox" id="isAuthoritative" name="isAuthoritative"
                                        value="true"
                                        data-value="${speciesList.isAuthoritative}" ${(speciesList.isAuthoritative == true) ? 'checked="checked"' : ''}/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2"
+                                   for="isRegionsApproved">${message(code: 'speciesList.isRegionsApproved.label', default: 'Included in Regions')}</label>
+
+                            <div class="col-md-10">
+                                <input type="checkbox" id="isRegionsApproved" name="isRegionsApproved"
+                                       value="true"
+                                       data-value="${speciesList.isRegionsApproved}" ${(speciesList.isRegionsApproved == true) ? 'checked="checked"' : ''}/>
                             </div>
                         </div>
 
