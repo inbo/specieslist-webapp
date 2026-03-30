@@ -109,4 +109,21 @@ class SpeciesListTagLib {
         queryUrl += ("&" + attrs.filter)
         out << request.getRequestURL().toString() + queryUrl
     }
+
+    /**
+     * Convert params map to a safe query string
+     * Handles arrays, lists, and single values
+     */
+    def safeQueryString = { Map paramsMap ->
+        def query = paramsMap.collect { k, v ->
+            if (v instanceof String[]) {
+                v.collect { val -> "${URLEncoder.encode(k as String,'UTF-8')}=${URLEncoder.encode(val,'UTF-8')}" }.flatten().join('&')
+            } else if (v instanceof List) {
+                v.collect { val -> "${URLEncoder.encode(k as String,'UTF-8')}=${URLEncoder.encode(val as String,'UTF-8')}" }.flatten().join('&')
+            } else {
+                "${URLEncoder.encode(k as String,'UTF-8')}=${URLEncoder.encode(v?.toString() ?: '', 'UTF-8')}"
+            }
+        }.flatten().join('&')
+        out << query
+    }
 }

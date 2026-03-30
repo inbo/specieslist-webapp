@@ -521,7 +521,7 @@
                                href="${request.contextPath}/speciesList/occurrences/${params.id}${params.toQueryString()}&type=Search">${message(code:'generic.lists.button.occurrences.label', default: 'View occurrence records')}</a>
 
                             <a class="btn btn-primary" title="${message(code:'generic.lists.button.selected.species.occurrences.tooltip', default:'View occurrences for the selection')}"
-                               href="${request.contextPath}/speciesList/occurrencesSelectedSpecies/${params.id}${params.toQueryString()}&type=Search">${message(code:'generic.lists.button.selected.species.occurrences.label', default: 'View occurrences for selection')}</a>
+                               href="${request.contextPath}/speciesList/occurrencesSelectedSpecies/${params.id}?${sl.safeQueryString(params)}&type=Search">${message(code:'generic.lists.button.selected.species.occurrences.label', default: 'View occurrences for selection')}</a>
 
 
                             <a href="${request.contextPath}/speciesList/spatialPortal/${params.id}${params.toQueryString()}&type=Search"
