@@ -410,7 +410,7 @@ class SpeciesListController {
         SpeciesListItem.executeQuery("select sli.guid  " + baseQueryAndParams[0] + " and sli.guid is not null", baseQueryAndParams[1] ,[max: limit])
     }
 
-    private def getGuidsForQueryResult(id, limit){
+    private def getGuidsForListAndSelectedSpecies(id, limit){
         def fqs = params.fq?[params.fq].flatten().findAll{ it != null }:null
         def baseQueryAndParams = queryService.constructWithFacets(" from SpeciesListItem sli ", fqs, params.id, params.q)
         SpeciesListItem.executeQuery("select sli.guid  " + baseQueryAndParams[0] + " and sli.guid is not null", baseQueryAndParams[1] ,[max: limit])
@@ -458,13 +458,18 @@ class SpeciesListController {
     def occurrences(){
         def splist = SpeciesList.findByDataResourceUid(params.id)
         def title = "Species List: " + splist.listName
-        if (biocacheService.isListIndexed(params.id)) {
+        // Commentary for why the 'if list is indexed' branch has been commented out (april 2026)
+        // The original intent of this branch was to redirect to biocache if the list was indexed, and to perform a batch search (ie species lsid matching) if it was not.
+        // However, this has caused confusion for (authoritative) users who update their lists and expect the changes to be reflected in biocache immediately.
+        // Since there is currently no way to casually launch a re-indexing of a list in biocache (only via pipelines total re-run), the decision has been made to always perform a batch search or download, which will ensure that the most up-to-date data is used.
+        // This may result in slower performance for lists that are already indexed, but it provides a more consistent user experience.
+        /*if (biocacheService.isListIndexed(params.id)) {
             if (splist.wkt && !splist.wkt.isEmpty()) {
                 redirect(url: biocacheService.performSearchForSpeciesListWithWkt(params.id, title, splist.wkt))
             } else {
                 redirect(url: biocacheService.getQueryUrlForList(params.id))
             }
-        } else if (params.id && params.type){
+        } else */if (params.id && params.type){
             if (splist && !isViewable(splist)) {
                 response.sendError(401, "Not authorised.")
                 return
@@ -495,8 +500,8 @@ class SpeciesListController {
                 return
             }
 
-            def guids = getGuidsForQueryResult(params.id, grailsApplication.config.downloadLimit)
-            def unMatchedNames = Collections.emptyList()//TODO is this correct?
+            def guids = getGuidsForListAndSelectedSpecies(params.id, grailsApplication.config.downloadLimit)
+            def unMatchedNames = Collections.emptyList() // this method implies the download for selected species, so there should be no unmatched names (ie list items with NO guid)
             def title = "Species List: " + splist.listName
             def downloadDto = new DownloadDto()
             bindData(downloadDto, params)
